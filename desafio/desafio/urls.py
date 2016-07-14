@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
+from django.conf import settings
 from django.contrib import admin
 from rest_framework import routers
 from comparador import views
@@ -23,5 +24,8 @@ router.register(r'servidores', views.ServidorViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include(router.urls))
+    url(r'^', include(router.urls)),
+    url(r'^home$', views.index),
+    url(r'^media/(.*)$', 'django.views.static.serve',
+       {'document_root': settings.MEDIA_ROOT}),
 ]

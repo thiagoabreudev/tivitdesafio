@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en" {% block ngapp %}ng-app="Comparador"{% endblock %}>
+<head>
+    <meta charset="UTF-8">
+    <script src="/media/js/Comparador.js"></script>
+    <script src="/media/js/controllers/ComparadorController.js"></script>
+    <script>
+        {#        globals = {#}
+        {#            servidoresUrl: {% url "servidores" %}#}
+        {#        }#}
+    </script>
+</head>
+<body {% block ngcontroller %}ng-controller="ComparadorController" {% endblock %}>
+{% block menu_lateral %}
+    <div class="col-md-3">
+        <p class="lead">Filtro</p>
+        <div class="form-group"><br>
+            <strong>CPU</strong>
+            <select name="qtd_cpu" id="qtd_cpu" class="form-control">
+                <option value="">Todos</option>
+                <option ng-repeat="servidor in filtros" onselect=""
+                        ng-click="pesquisa(servidor.quantidade_cpu)"
+                        value="{$servidor.quantidade_cpu$}">{$servidor.quantidade_cpu$}
+                </option>
+            </select>
+        </div>
+        <div class="form-group"><br>
+            <strong>Sistema</strong>
+            <select name="sistema"class="form-control">
+                <option value="">Todos</option>
+                <option ng-repeat="servidor in filtros" onselect=""
+                        ng-click="pesquisa(servidor.quantidade_cpu)"
+                        value="{$servidor.sistema_operacional$}">{$servidor.sistema_operacional$}
+                </option>
+            </select>
+        </div>
+    </div>
+
+{% endblock %}
+{% block corpo %}
+    <div class="row">
+        <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="servidor in servidores">
+            <div class="thumbnail">
+                <img src="http://placehold.it/320x150" alt="">
+
+                <div class="caption h4" style="height: 170px">
+                    <h4 class="pull-right">${$servidor.preco$}</h4>
+                    <h4><a href="#">{$servidor.nome$}</a>
+                    </h4>
+
+                    <p>Sistema operacional: {$servidor.sistema_operacional$}</p>
+
+                    <p>CPUS: {$servidor.quantidade_cpu$}</p>
+
+                    <p>Memoria: {$servidor.quantidade_memoria$}</p>
+
+                    <p>Disco: {$servidor.quantidade_hd$}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</body>
+</html>
