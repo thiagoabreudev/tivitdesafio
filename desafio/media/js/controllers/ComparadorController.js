@@ -13,14 +13,6 @@ angular.module('Comparador').controller('ComparadorController',
                 }
             )
         };
-        $scope.getLogo = function (provedor) {
-            $http.get(provedor).success(
-                function (data) {
-                    $scope.servidores = data;
-                    $scope.filtros = data;
-                }
-            )
-        };
         $http.get('http://127.0.0.1:8000/servidores/?format=json').success(
             function (data) {
                 $scope.servidores = data;
