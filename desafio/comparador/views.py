@@ -21,11 +21,14 @@ class ServidorViewSet(viewsets.ModelViewSet):
     serializer_class = ServidorSerializer
 
     def get_queryset(self):
-        f = Servidor.objects.filter
-        dados = False
-        if self.request.query_params.get('cpu'):
-            dados = f(quantidade_cpu=self.request.query_params.get('cpu'))
-        return dados or Servidor.objects.all()
+        dados = Servidor.objects.all()
+        filtro = self.request.query_params
+        if filtro.get('quantidade_cpu'):
+            dados = filter(lambda i: str(i.quantidade_cpu) == filtro.get('quantidade_cpu'), dados)
+        if filtro.get('quantidade_memoria'):
+            dados = filter(lambda i: str(i.quantidade_memoria) == filtro.get('quantidade_memoria'),
+                           dados)
+        return dados
 
 
 def index(request):

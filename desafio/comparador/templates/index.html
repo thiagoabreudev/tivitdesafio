@@ -6,44 +6,38 @@
     <script src="/media/js/Comparador.js"></script>
     <script src="/media/js/controllers/ComparadorController.js"></script>
     <script>
-        {#        globals = {#}
-        {#            servidoresUrl: {% url "servidores" %}#}
-        {#        }#}
     </script>
 </head>
 <body {% block ngcontroller %}ng-controller="ComparadorController" {% endblock %}>
 {% block menu_lateral %}
     <div class="col-md-3">
-        <p class="lead">Filtro</p>
+        <p class="lead">
+            <a href="#" class="btn btn-primary btn-block" ng-click="pesquisar(filtro)">
+                <span class="glyphicon glyphicon-search"></span> Pesquisar
+            </a>
+        </p>
 
         <div class="form-group"><br>
             <strong>Preço</strong>
-            <select name="preco" class="form-control">
+            <select name="preco" class="form-control"
+                    ng-model="filtro.preco"
+                    ng-options="servidor.preco as servidor.preco for servidor in servidores">
                 <option value="">Todos</option>
-                <option ng-repeat="servidor in filtros" onselect=""
-                        ng-click="pesquisa(servidor.preco)"
-                        value="{$servidor.preco$}">{$servidor.preco$}
-                </option>
             </select>
         </div>
         <div class="form-group"><br>
             <strong>CPU</strong>
-            <select name="qtd_cpu" id="qtd_cpu" class="form-control">
+            <select name="qtd_cpu" id="qtd_cpu" class="form-control"
+                    ng-model="filtro.quantidade_cpu"
+                    ng-options="servidor.quantidade_cpu as servidor.quantidade_cpu  for servidor in servidores">
                 <option value="">Todos</option>
-                <option ng-repeat="servidor in filtros" onselect=""
-                        ng-click="pesquisa(servidor.quantidade_cpu)"
-                        value="{$servidor.quantidade_cpu$}">{$servidor.quantidade_cpu$}
-                </option>
             </select>
         </div>
         <div class="form-group"><br>
             <strong>Sistema</strong>
-            <select name="sistema" class="form-control">
+            <select name="sistema" class="form-control" ng-model="filtro.sistema_operacional"
+                    ng-options="servidor.sistema_operacional as servidor.sistema_operacional for servidor in servidores">
                 <option value="">Todos</option>
-                <option ng-repeat="servidor in filtros" onselect=""
-                        ng-click="pesquisa(servidor.quantidade_cpu)"
-                        value="{$servidor.sistema_operacional$}">{$servidor.sistema_operacional$}
-                </option>
             </select>
 
             <div class="form-group"><br>
@@ -52,18 +46,15 @@
                     <option value="">Todos</option>
                     <option ng-repeat="servidor in filtros" onselect=""
                             ng-click="pesquisa(servidor.quantidade_hd)"
-                            value="{$servidor.quantidade_hd}">{$servidor.quantidade_hd$}
+                            value="{$servidor.quantidade_hd$}">{$servidor.quantidade_hd$}
                     </option>
                 </select>
             </div>
             <div class="form-group"><br>
                 <strong>Memória</strong>
-                <select name="memoria" class="form-control">
+                <select name="memoria" class="form-control" ng-model="filtro.quantidade_memoria"
+                        ng-options="servidor.quantidade_memoria as servidor.quantidade_memoria for servidor in servidores">
                     <option value="">Todos</option>
-                    <option ng-repeat="servidor in filtros" onselect=""
-                            ng-click="pesquisa(servidor.quantidade_memoria)"
-                            value="{$servidor.quantidade_memoria$}">{$servidor.quantidade_memoria$}
-                    </option>
                 </select>
             </div>
         </div>
@@ -71,11 +62,11 @@
 {% endblock %}
 {% block corpo %}
     <div class="row">
-        <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="servidor in servidores">
+        <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="servidor in filtroServidores">
             <div class="thumbnail">
                 <img src="{$servidor.provedor.logo$}" alt="">
 
-                <div class="caption h4" style="height: 170px">
+                <div class="caption h4">
                     <h4 class="pull-right">${$servidor.preco$}</h4>
                     <h4><a href="#">{$servidor.nome$}</a>
                     </h4>
