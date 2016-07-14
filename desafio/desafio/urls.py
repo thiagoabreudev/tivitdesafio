@@ -26,7 +26,7 @@ router.register(r'provedores', views.ProvedorViewSet)
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(router.urls)),
-    url(r'^home$', views.index),
+    url(r'^home$', views.index, name='home'),
     url(r'^media/(.*)$', 'django.views.static.serve',
        {'document_root': settings.MEDIA_ROOT}),
 ]

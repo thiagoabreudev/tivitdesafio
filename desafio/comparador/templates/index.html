@@ -6,6 +6,7 @@
     <script src="/media/js/Comparador.js"></script>
     <script src="/media/js/controllers/ComparadorController.js"></script>
     <script>
+        globals = {'servidorUrl': {% url 'servidores' %}}
     </script>
 </head>
 <body {% block ngcontroller %}ng-controller="ComparadorController" {% endblock %}>

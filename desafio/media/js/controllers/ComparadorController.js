@@ -5,7 +5,7 @@
 angular.module('Comparador').controller('ComparadorController',
     function ($scope, $http) {
         $scope.pesquisar = function (filtro) {
-            $http.get('http://127.0.0.1:8000/servidores/?format=json',
+            $http.get('/servidores/?format=json',
                 {
                     'params': {
                         'quantidade_cpu': filtro.quantidade_cpu,
@@ -17,7 +17,7 @@ angular.module('Comparador').controller('ComparadorController',
                 }
             )
         };
-        $http.get('http://127.0.0.1:8000/servidores/?format=json').success(
+        $http.get('/servidores/?format=json').success(
             function (data) {
                 $scope.servidores = data;
                 $scope.filtroServidores = data;
