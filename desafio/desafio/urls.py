@@ -21,6 +21,7 @@ from comparador import views
 
 router = routers.DefaultRouter()
 router.register(r'servidores', views.ServidorViewSet)
+router.register(r'provedores', views.ProvedorViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

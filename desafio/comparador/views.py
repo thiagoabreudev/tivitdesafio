@@ -1,8 +1,16 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from comparador.models import Servidor
-from comparador.serializers import ServidorSerializer
+from comparador.models import Servidor, Provedor
+from comparador.serializers import ServidorSerializer, ProvedorSerializer
 # Create your views here.
+
+
+class ProvedorViewSet(viewsets.ModelViewSet):
+    """
+    Classe responsavel pela representacao da view da representacao ProvedorSerializer
+    """
+    queryset = Provedor.objects.all()
+    serializer_class = ProvedorSerializer
 
 
 class ServidorViewSet(viewsets.ModelViewSet):

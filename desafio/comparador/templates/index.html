@@ -15,6 +15,17 @@
 {% block menu_lateral %}
     <div class="col-md-3">
         <p class="lead">Filtro</p>
+
+        <div class="form-group"><br>
+            <strong>Preço</strong>
+            <select name="preco" class="form-control">
+                <option value="">Todos</option>
+                <option ng-repeat="servidor in filtros" onselect=""
+                        ng-click="pesquisa(servidor.preco)"
+                        value="{$servidor.preco$}">{$servidor.preco$}
+                </option>
+            </select>
+        </div>
         <div class="form-group"><br>
             <strong>CPU</strong>
             <select name="qtd_cpu" id="qtd_cpu" class="form-control">
@@ -27,22 +38,42 @@
         </div>
         <div class="form-group"><br>
             <strong>Sistema</strong>
-            <select name="sistema"class="form-control">
+            <select name="sistema" class="form-control">
                 <option value="">Todos</option>
                 <option ng-repeat="servidor in filtros" onselect=""
                         ng-click="pesquisa(servidor.quantidade_cpu)"
                         value="{$servidor.sistema_operacional$}">{$servidor.sistema_operacional$}
                 </option>
             </select>
+
+            <div class="form-group"><br>
+                <strong>Disco</strong>
+                <select name="disco" class="form-control">
+                    <option value="">Todos</option>
+                    <option ng-repeat="servidor in filtros" onselect=""
+                            ng-click="pesquisa(servidor.quantidade_hd)"
+                            value="{$servidor.quantidade_hd}">{$servidor.quantidade_hd$}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group"><br>
+                <strong>Memória</strong>
+                <select name="memoria" class="form-control">
+                    <option value="">Todos</option>
+                    <option ng-repeat="servidor in filtros" onselect=""
+                            ng-click="pesquisa(servidor.quantidade_memoria)"
+                            value="{$servidor.quantidade_memoria$}">{$servidor.quantidade_memoria$}
+                    </option>
+                </select>
+            </div>
         </div>
     </div>
-
 {% endblock %}
 {% block corpo %}
     <div class="row">
         <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="servidor in servidores">
             <div class="thumbnail">
-                <img src="http://placehold.it/320x150" alt="">
+                <img src="{$servidor.provedor.logo$}" alt="">
 
                 <div class="caption h4" style="height: 170px">
                     <h4 class="pull-right">${$servidor.preco$}</h4>
