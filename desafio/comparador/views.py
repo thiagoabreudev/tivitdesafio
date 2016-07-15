@@ -28,6 +28,15 @@ class ServidorViewSet(viewsets.ModelViewSet):
         if filtro.get('quantidade_memoria'):
             dados = filter(lambda i: str(i.quantidade_memoria) == filtro.get('quantidade_memoria'),
                            dados)
+        if filtro.get('preco'):
+            try:
+                preco = float(filtro.get('preco'))
+                dados = filter(lambda i: i.preco <= preco, dados)
+            except ValueError:
+                pass
+        if filtro.get('sistema_operacional'):
+            dados = filter(lambda i: filtro.get('sistema_operacional').upper() in
+                           i.sistema_operacional.upper(), dados)
         return dados
 
 

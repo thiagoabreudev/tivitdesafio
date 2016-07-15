@@ -18,43 +18,38 @@
             </a>
         </p>
 
-        <div class="form-group"><br>
-            <strong>Preço</strong>
-            <select name="preco" class="form-control"
-                    ng-model="filtro.preco"
-                    ng-options="servidor.preco as servidor.preco for servidor in servidores">
-                <option value="">Todos</option>
-            </select>
+        <div class="form-group"><br/>
+            <strong>Preço até</strong>
+            <div class="input-group">
+              <span class="input-group-addon">$</span>
+              <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
+                      ng-model="filtro.preco" step="0.1">
+            </div>
         </div>
-        <div class="form-group"><br>
-            <strong>CPU</strong>
+        <div class="form-group"><br/>
+            <strong>CPU (Quantidade de núcleos)</strong>
             <select name="qtd_cpu" id="qtd_cpu" class="form-control"
                     ng-model="filtro.quantidade_cpu"
-                    ng-options="servidor.quantidade_cpu as servidor.quantidade_cpu  for servidor in servidores">
+                    ng-options="p for p in parametros.quantidade_cpu">
                 <option value="">Todos</option>
             </select>
         </div>
         <div class="form-group"><br>
-            <strong>Sistema</strong>
-            <select name="sistema" class="form-control" ng-model="filtro.sistema_operacional"
-                    ng-options="servidor.sistema_operacional as servidor.sistema_operacional for servidor in servidores">
-                <option value="">Todos</option>
-            </select>
-
+            <strong>Sistema</strong><br/>
+            <input type="text" class="form-control" placeholder="Informe o sistema operacional"
+                    ng-model="filtro.sistema_operacional">
             <div class="form-group"><br>
                 <strong>Disco</strong>
-                <select name="disco" class="form-control">
+                <select name="disco" class="form-control" ng-model="filtro.quantidade_hd"
+                        ng-options="p for p in parametros.quantidade_hd">
                     <option value="">Todos</option>
-                    <option ng-repeat="servidor in filtros" onselect=""
-                            ng-click="pesquisa(servidor.quantidade_hd)"
-                            value="{$servidor.quantidade_hd$}">{$servidor.quantidade_hd$}
                     </option>
                 </select>
             </div>
             <div class="form-group"><br>
                 <strong>Memória</strong>
                 <select name="memoria" class="form-control" ng-model="filtro.quantidade_memoria"
-                        ng-options="servidor.quantidade_memoria as servidor.quantidade_memoria for servidor in servidores">
+                        ng-options="p for p in parametros.quantidade_memoria">
                     <option value="">Todos</option>
                 </select>
             </div>
@@ -67,7 +62,7 @@
             <div class="thumbnail">
                 <img src="{$servidor.provedor.logo$}" alt="">
 
-                <div class="caption h4">
+                <div class="caption">
                     <h4 class="pull-right">${$servidor.preco$}</h4>
                     <h4><a href="#">{$servidor.nome$}</a>
                     </h4>
