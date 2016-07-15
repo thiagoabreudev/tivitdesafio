@@ -28,6 +28,9 @@ class ServidorViewSet(viewsets.ModelViewSet):
         if filtro.get('quantidade_memoria'):
             dados = filter(lambda i: str(i.quantidade_memoria) == filtro.get('quantidade_memoria'),
                            dados)
+        if filtro.get('quantidade_hd'):
+            dados = filter(lambda i: str(i.quantidade_hd) == filtro.get('quantidade_hd'),
+                           dados)
         if filtro.get('preco'):
             try:
                 preco = float(filtro.get('preco'))

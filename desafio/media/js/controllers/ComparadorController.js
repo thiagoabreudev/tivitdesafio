@@ -17,6 +17,7 @@ angular.module('Comparador').controller('ComparadorController',
                     'params': {
                         'quantidade_cpu': filtro.quantidade_cpu,
                         'quantidade_memoria': filtro.quantidade_memoria,
+                        'quantidade_hd': filtro.quantidade_hd,
                         'preco': filtro.preco,
                         'sistema_operacional': filtro.sistema_operacional,
                         'provedor': filtro.provedor
@@ -31,7 +32,7 @@ angular.module('Comparador').controller('ComparadorController',
             function (data) {
                 $scope.parametros = {
                     'quantidade_cpu': [], 'quantidade_hd': [], 'quantidade_memoria': [],
-                    'provedor': []
+                    'provedor': [], 'sistema_operacional': []
                 };
                 $scope.servidores = data;
                 $scope.filtroServidores = data;
@@ -52,6 +53,10 @@ angular.module('Comparador').controller('ComparadorController',
                     if ($scope.parametros.provedor.indexOf(
                             value.provedor.nome) == -1) {
                         $scope.parametros.provedor.push(value.provedor.nome)
+                    }
+                    if ($scope.parametros.sistema_operacional.indexOf(
+                            value.sistema_operacional) == -1) {
+                        $scope.parametros.sistema_operacional.push(value.sistema_operacional)
                     }
                 });
             }
