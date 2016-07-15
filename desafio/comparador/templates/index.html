@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 <!DOCTYPE html>
-<html lang="en" {% block ngapp %}ng-app="Comparador"{% endblock %}>
+<html lang="en" {% block ngapp %}ng-app="Comparador"{% endblock %}
+      xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <script src="/media/js/Comparador.js"></script>
@@ -13,18 +14,28 @@
 {% block menu_lateral %}
     <div class="col-md-3">
         <p class="lead">
-            <a href="#" class="btn btn-primary btn-block" ng-click="pesquisar(filtro)">
+            <a href="#" class="btn btn-danger btn-block" ng-click="pesquisar(filtro)">
                 <span class="glyphicon glyphicon-search"></span> Pesquisar
             </a>
         </p>
 
         <div class="form-group"><br/>
             <strong>Preço até</strong>
+
             <div class="input-group">
-              <span class="input-group-addon">$</span>
-              <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
-                      ng-model="filtro.preco" step="0.1">
+                <span class="input-group-addon">$</span>
+                <input type="number" class="form-control"
+                       aria-label="Amount (to the nearest dollar)"
+                       ng-model="filtro.preco" step="0.1">
             </div>
+        </div>
+        <div class="form-group"><br/>
+            <strong>Provedor</strong>
+            <select name="qtd_cpu" id="qtd_cpu" class="form-control"
+                    ng-model="filtro.provedor"
+                    ng-options="p for p in parametros.provedor">
+                <option value="">Todos</option>
+            </select>
         </div>
         <div class="form-group"><br/>
             <strong>CPU (Quantidade de núcleos)</strong>
@@ -37,7 +48,8 @@
         <div class="form-group"><br>
             <strong>Sistema</strong><br/>
             <input type="text" class="form-control" placeholder="Informe o sistema operacional"
-                    ng-model="filtro.sistema_operacional">
+                   ng-model="filtro.sistema_operacional">
+
             <div class="form-group"><br>
                 <strong>Disco</strong>
                 <select name="disco" class="form-control" ng-model="filtro.quantidade_hd"
@@ -57,25 +69,44 @@
     </div>
 {% endblock %}
 {% block corpo %}
-    <div class="row">
-        <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="servidor in filtroServidores">
-            <div class="thumbnail">
-                <img src="{$servidor.provedor.logo$}" alt="">
 
-                <div class="caption">
-                    <h4 class="pull-right">${$servidor.preco$}</h4>
-                    <h4><a href="#">{$servidor.nome$}</a>
-                    </h4>
-
-                    <p>Sistema operacional: {$servidor.sistema_operacional$}</p>
-
-                    <p>CPUS: {$servidor.quantidade_cpu$}</p>
-
-                    <p>Memoria: {$servidor.quantidade_memoria$}</p>
-
-                    <p>Disco: {$servidor.quantidade_hd$}</p>
-                </div>
-            </div>
+    <p class="lead">
+        <a href="#" class="btn btn-danger" ng-click="sortBy()">
+            <span class="glyphicon glyphicon-sort"></span> Ordenar por preço
+        </a>
+    </p>
+    <div class="row flat">
+        <div class="col-lg-3 col-md-3 col-xs-6"
+             ng-repeat="servidor in filtroServidores | orderBy:preco:reverse">
+            <ul class="plan plan1">
+                <li class="plan-name">
+                    Plano Mensal
+                </li>
+                <li class="plan-price">
+                    <img src="{$servidor.provedor.logo$}" alt="" height="50px" width="auto">
+                </li>
+                <li class="plan-price">
+                    <strong>${$servidor.preco$}</strong> / mês
+                </li>
+                <li>
+                    <strong>{$servidor.quantidade_hd$}GB</strong> disco
+                </li>
+                <li>
+                    <strong>{$servidor.quantidade_memoria$}MB</strong> RAM
+                </li>
+                <li>
+                    <strong>{$servidor.sistema_operacional$}</strong> Sistema
+                </li>
+                <li>
+                    <strong>{$servidor.quantidade_cpu$} Núcleos</strong> CPU
+                </li>
+                <li>
+                    <strong>{$servidor.provedor.nome$}</strong> Provedor
+                </li>
+                {#                <li class="plan-action">#}
+                {#                    <a href="#" class="btn btn-danger btn-lg">Detalhes</a>#}
+                {#                </li>#}
+            </ul>
         </div>
     </div>
 {% endblock %}

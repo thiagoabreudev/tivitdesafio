@@ -4,6 +4,13 @@
 
 angular.module('Comparador').controller('ComparadorController',
     function ($scope, $http) {
+        $scope.sortBy = function(){
+            if ($scope.reverse){
+                $scope.reverse = false;
+            }else{
+                $scope.reverse = true;
+            }
+        };
         $scope.pesquisar = function (filtro) {
             $http.get('/api/servidores/?format=json',
                 {
@@ -11,7 +18,8 @@ angular.module('Comparador').controller('ComparadorController',
                         'quantidade_cpu': filtro.quantidade_cpu,
                         'quantidade_memoria': filtro.quantidade_memoria,
                         'preco': filtro.preco,
-                        'sistema_operacional': filtro.sistema_operacional
+                        'sistema_operacional': filtro.sistema_operacional,
+                        'provedor': filtro.provedor
                     }
                 }).success(
                 function (data) {
@@ -22,7 +30,8 @@ angular.module('Comparador').controller('ComparadorController',
         $http.get('/api/servidores/?format=json').success(
             function (data) {
                 $scope.parametros = {
-                    'quantidade_cpu': [], 'quantidade_hd': [], 'quantidade_memoria': []
+                    'quantidade_cpu': [], 'quantidade_hd': [], 'quantidade_memoria': [],
+                    'provedor': []
                 };
                 $scope.servidores = data;
                 $scope.filtroServidores = data;
@@ -39,6 +48,10 @@ angular.module('Comparador').controller('ComparadorController',
                     if ($scope.parametros.quantidade_memoria.indexOf(
                             value.quantidade_memoria) == -1) {
                         $scope.parametros.quantidade_memoria.push(value.quantidade_memoria)
+                    }
+                    if ($scope.parametros.provedor.indexOf(
+                            value.provedor.nome) == -1) {
+                        $scope.parametros.provedor.push(value.provedor.nome)
                     }
                 });
             }

@@ -11,6 +11,7 @@ class Provedor(models.Model):
 
     class Meta:
         db_table = u'provedor'
+        verbose_name_plural = 'Provedores'
 
     def __unicode__(self):
         return self.nome
@@ -31,6 +32,7 @@ class Servidor(models.Model):
 
     class Meta:
         db_table = u'servidor'
+        verbose_name_plural = u'Servidores'
 
     def __unicode__(self):
         return self.nome

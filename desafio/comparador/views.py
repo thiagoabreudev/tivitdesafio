@@ -37,6 +37,9 @@ class ServidorViewSet(viewsets.ModelViewSet):
         if filtro.get('sistema_operacional'):
             dados = filter(lambda i: filtro.get('sistema_operacional').upper() in
                            i.sistema_operacional.upper(), dados)
+        if filtro.get('provedor'):
+            dados = filter(lambda i: filtro.get('provedor').upper() in
+                           i.provedor.nome.upper(), dados)
         return dados
 
 

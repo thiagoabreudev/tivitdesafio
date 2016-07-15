@@ -10,17 +10,28 @@
         <script src="/media/lib/angular/angular-route.js"></script>
         <script src="/media/js/Comparador.js"></script>
         <script src="/media/js/controllers/ComparadorController.js"></script>
+        <script src="/media/lib/pricing-table/js/html5shiv.js"></script>
+        <script src="/media/lib/pricing-table/js/respond.min.js"></script>
+
     {% endblock %}
 
     {% block style %}
         <link href="/media/lib/startbootstrap/css/bootstrap.css" rel="stylesheet">
         <link href="/media/lib/startbootstrap/css/shop-homepage.css" rel="stylesheet">
+        <link href="/media/css/inherit.css" rel="stylesheet">
+        <link href="/media/lib/pricing-table/css/main.css" rel="stylesheet">
+        <style>
+            body {
+                padding-top: 70px;
+            }
+        </style>
     {% endblock %}
 </head>
 <body {% block ngcontroller %}{% endblock %}>
 {% block menu %}
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        {#    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">#}
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -62,6 +73,26 @@
         </div>
     </div>
 {% endblock %}
-{% block rodape %} {% endblock %}
+{% block rodape %}
+    <div class="container">
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-xs-6 col-md-1">
+                    <a href="#" class="thumbnail">
+                        <img src="/media/img/logo-banner-tivit.jpg"/>
+                    </a>
+                </div>
+                <spam>Copyright &copy; 2016 TIVIT.
+                    Todos os direitos Reservados.
+                </spam>
+            </div>
+        </footer>
+
+    </div>
+{% endblock %}
 </body>
 </html>
